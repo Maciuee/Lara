@@ -48,13 +48,16 @@ class ComposerStaticInite82bb762352c1a457ceebf34cd70ecc0
         'L' => 
         array (
             'Laravel\\Ui\\' => 11,
+            'Laravel\\Sanctum\\' => 16,
         ),
         'I' => 
         array (
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Foundation\\Auth\\' => 27,
             'Illuminate\\Filesystem\\' => 22,
+            'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
+            'Illuminate\\Container\\' => 21,
             'Illuminate\\Console\\' => 19,
         ),
         'D' => 
@@ -136,6 +139,10 @@ class ComposerStaticInite82bb762352c1a457ceebf34cd70ecc0
         array (
             0 => __DIR__ . '/..' . '/laravel/ui/src',
         ),
+        'Laravel\\Sanctum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/sanctum/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/support',
@@ -148,9 +155,17 @@ class ComposerStaticInite82bb762352c1a457ceebf34cd70ecc0
         array (
             0 => __DIR__ . '/..' . '/illuminate/filesystem',
         ),
+        'Illuminate\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/database',
+        ),
         'Illuminate\\Contracts\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/contracts',
+        ),
+        'Illuminate\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/container',
         ),
         'Illuminate\\Console\\' => 
         array (

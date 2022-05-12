@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '8d6fc3a64c8169948bd547def2f270d7834eca05',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '8d6fc3a64c8169948bd547def2f270d7834eca05',
             'dev_requirement' => false,
         ),
         'doctrine/inflector' => array(
@@ -37,6 +37,15 @@
             'reference' => 'c2c078d71efc8d75ca3741402a4b0fd3bf05c6fc',
             'dev_requirement' => false,
         ),
+        'illuminate/container' => array(
+            'pretty_version' => 'v7.30.6',
+            'version' => '7.30.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../illuminate/container',
+            'aliases' => array(),
+            'reference' => '06456a2ea5656c2f1ebda37039ce14c1bfc973b3',
+            'dev_requirement' => false,
+        ),
         'illuminate/contracts' => array(
             'pretty_version' => 'v7.30.6',
             'version' => '7.30.6.0',
@@ -44,6 +53,15 @@
             'install_path' => __DIR__ . '/../illuminate/contracts',
             'aliases' => array(),
             'reference' => '2449f2ea949ddf995a3dcffe5e21c768cf7d6478',
+            'dev_requirement' => false,
+        ),
+        'illuminate/database' => array(
+            'pretty_version' => 'v7.30.6',
+            'version' => '7.30.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../illuminate/database',
+            'aliases' => array(),
+            'reference' => 'e26b023f23c08968950470189e108e30f2e3b7ba',
             'dev_requirement' => false,
         ),
         'illuminate/filesystem' => array(
@@ -62,6 +80,15 @@
             'install_path' => __DIR__ . '/../illuminate/support',
             'aliases' => array(),
             'reference' => 'c7b42acd009c94a3f8b749a65f6835db90174d58',
+            'dev_requirement' => false,
+        ),
+        'laravel/sanctum' => array(
+            'pretty_version' => 'v2.15.1',
+            'version' => '2.15.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/sanctum',
+            'aliases' => array(),
+            'reference' => '31fbe6f85aee080c4dc2f9b03dc6dd5d0ee72473',
             'dev_requirement' => false,
         ),
         'laravel/ui' => array(
@@ -90,6 +117,12 @@
             'aliases' => array(),
             'reference' => '513e0666f7216c7459170d56df27dfcefe1689ea',
             'dev_requirement' => false,
+        ),
+        'psr/container-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
         ),
         'psr/log-implementation' => array(
             'dev_requirement' => false,
