@@ -6,6 +6,7 @@
 
  import Vue from 'vue';
  import Spa from './Spa.vue';
+ import router from './router';
 
 require('./bootstrap');
 

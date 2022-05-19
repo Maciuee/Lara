@@ -1,6 +1,6 @@
 <template>
 <div>
-Home component
+Login component
 </div>
 </template>
 <script>
