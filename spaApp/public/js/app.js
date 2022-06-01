@@ -1980,26 +1980,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.post("/api/logout");
 
               case 3:
+                localStorage.removeItem("isLogged");
+
                 if (_this.$route.name != "home") {
                   _this.$router.push({
                     name: "home"
                   });
                 }
 
-                _context.next = 9;
+                _context.next = 10;
                 break;
 
-              case 6:
-                _context.prev = 6;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 6]]);
+        }, _callee, null, [[0, 7]]);
       }))();
     }
   }
@@ -2111,26 +2113,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
 
             case 5:
+              localStorage.setItem("isLogged", "true");
+
               _this.$router.push({
                 name: "dashboard"
               });
 
-              _context.next = 13;
+              _context.next = 14;
               break;
 
-            case 8:
-              _context.prev = 8;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
               _this.form.email = "";
               _this.form.password = "";
 
-            case 13:
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 8]]);
+      }, _callee, null, [[0, 9]]);
     }))();
   })
 });
@@ -54349,7 +54353,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     name: 'login',
     path: '/login',
-    component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    meta: {
+      guestOnly: true
+    }
   }, {
     name: 'dashboard',
     path: '/dashboard',
@@ -54362,6 +54369,42 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     redirect: "/"
   }]
 });
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.requiresAuth;
+  })) {
+    if (!isLogged()) {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(function (record) {
+    return record.meta.guestOnly;
+  })) {
+    if (isLogged()) {
+      next({
+        path: '/dashboard',
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+function isLogged() {
+  return localStorage.getItem("isLogged");
+}
+
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),
