@@ -35,7 +35,8 @@ require('./bootstrap');
     el: '#app',
     template: '<spa/>',
     components: {
-    Spa
+    Spa,
+    Error
     },
     router
     })

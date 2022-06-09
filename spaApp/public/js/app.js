@@ -1931,6 +1931,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    var _this = this;
+
+    axios.interceptors.response.use(function (response) {
+      return response;
+    }, function (error) {
+      if (error.response.status === 401) {
+        localStorage.removeItem("isLogged");
+
+        _this.$root.$emit("isLogged", false);
+
+        if (_this.$route.path != "/login") {
+          _this.$router.push({
+            name: "login"
+          });
+        }
+      }
+
+      return Promise.reject(error);
+    });
+  },
   components: {
     Navigation: _components_Navigation_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -1966,9 +1987,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isLogged: null
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.isLogged = localStorage.getItem("isLogged");
+    this.$root.$on("isLogged", function (value) {
+      _this.isLogged = value;
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$root.$off("isLogged");
+  },
   methods: {
     logout: function logout() {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -1981,13 +2018,84 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 localStorage.removeItem("isLogged");
+                _this2.isLogged = false;
 
-                if (_this.$route.name != "home") {
-                  _this.$router.push({
+                if (_this2.$route.name != "home") {
+                  _this2.$router.push({
                     name: "home"
                   });
                 }
 
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Dashboard.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Dashboard.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      user: null
+    };
+  },
+  created: function created() {
+    this.getUser();
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var user;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get("/api/user");
+
+              case 3:
+                user = _context.sent;
+                _this.user = user.data.name;
                 _context.next = 10;
                 break;
 
@@ -2006,24 +2114,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Dashboard.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Dashboard.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -2115,26 +2205,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 5:
               localStorage.setItem("isLogged", "true");
 
+              _this.$root.$emit("isLogged", true);
+
               _this.$router.push({
                 name: "dashboard"
               });
 
-              _context.next = 14;
+              _context.next = 15;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 10:
+              _context.prev = 10;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
               _this.form.email = "";
               _this.form.password = "";
 
-            case 14:
+            case 15:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 10]]);
     }))();
   })
 });
@@ -38536,27 +38628,33 @@ var render = function () {
       _vm._v(" "),
       _c("router-link", { attrs: { to: { name: "home" } } }, [_vm._v("Home")]),
       _vm._v("|\r\n"),
-      _c("router-link", { attrs: { to: { name: "login" } } }, [
-        _vm._v("Login"),
-      ]),
+      !_vm.isLogged
+        ? _c("router-link", { attrs: { to: { name: "login" } } }, [
+            _vm._v("Login"),
+          ])
+        : _vm._e(),
       _vm._v("|\r\n"),
-      _c(
-        "a",
-        {
-          attrs: { href: "" },
-          on: {
-            click: function ($event) {
-              $event.preventDefault()
-              return _vm.logout.apply(null, arguments)
+      _vm.isLogged
+        ? _c(
+            "a",
+            {
+              attrs: { href: "" },
+              on: {
+                click: function ($event) {
+                  $event.preventDefault()
+                  return _vm.logout.apply(null, arguments)
+                },
+              },
             },
-          },
-        },
-        [_vm._v("Wyloguj")]
-      ),
+            [_vm._v("Wyloguj")]
+          )
+        : _vm._e(),
       _vm._v("|\r\n"),
-      _c("router-link", { attrs: { to: { name: "dashboard" } } }, [
-        _vm._v("Dashboard"),
-      ]),
+      _vm.isLogged
+        ? _c("router-link", { attrs: { to: { name: "dashboard" } } }, [
+            _vm._v("Dashboard"),
+          ])
+        : _vm._e(),
     ],
     1
   )
@@ -38583,7 +38681,12 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\r\nDashboard component\r\n")])
+  return _c("div", [
+    _vm._v("\r\nDashboard component\r\n"),
+    _vm.user
+      ? _c("div", [_vm._v("Zalogowany użytkownik: " + _vm._s(_vm.user) + " ")])
+      : _vm._e(),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54200,7 +54303,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   template: '<spa/>',
   components: {
-    Spa: _Spa_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Spa: _Spa_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Error: Error
   },
   router: _router__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
