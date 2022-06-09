@@ -24,19 +24,15 @@ password: ""
 }
 };
 },
-methods: { login() {console.log("Będzie logowanie tutaj!")},
-
-async login() {
+methods: { async login() {
 try {
 await axios.get("/sanctum/csrf-cookie");
 await axios.post("/api/login", {
 email: this.form.email,
 password: this.form.password
 });
-localStorage.setItem("isLogged", "true");
-
+localStorage.setItem("isLogged","true");
 this.$root.$emit("isLogged", true);
-
 this.$router.push({ name: "dashboard" });
 } catch (err) {
 console.log(err);
@@ -44,6 +40,9 @@ this.form.email = "";
 this.form.password = "";
 }
 }
-} };
+},
+};
+
+
 </script>
 

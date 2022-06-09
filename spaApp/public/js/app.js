@@ -1931,27 +1931,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    var _this = this;
-
-    axios.interceptors.response.use(function (response) {
-      return response;
-    }, function (error) {
-      if (error.response.status === 401) {
-        localStorage.removeItem("isLogged");
-
-        _this.$root.$emit("isLogged", false);
-
-        if (_this.$route.path != "/login") {
-          _this.$router.push({
-            name: "login"
-          });
-        }
-      }
-
-      return Promise.reject(error);
-    });
-  },
   components: {
     Navigation: _components_Navigation_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -1976,7 +1955,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -2146,8 +2124,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2179,56 +2155,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     };
   },
-  methods: _defineProperty({
+  methods: {
     login: function login() {
-      console.log("Będzie logowanie tutaj!");
-    }
-  }, "login", function login() {
-    var _this = this;
+      var _this = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios.get("/sanctum/csrf-cookie");
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get("/sanctum/csrf-cookie");
 
-            case 3:
-              _context.next = 5;
-              return axios.post("/api/login", {
-                email: _this.form.email,
-                password: _this.form.password
-              });
+              case 3:
+                _context.next = 5;
+                return axios.post("/api/login", {
+                  email: _this.form.email,
+                  password: _this.form.password
+                });
 
-            case 5:
-              localStorage.setItem("isLogged", "true");
+              case 5:
+                localStorage.setItem("isLogged", "true");
 
-              _this.$root.$emit("isLogged", true);
+                _this.$root.$emit("isLogged", true);
 
-              _this.$router.push({
-                name: "dashboard"
-              });
+                _this.$router.push({
+                  name: "dashboard"
+                });
 
-              _context.next = 15;
-              break;
+                _context.next = 15;
+                break;
 
-            case 10:
-              _context.prev = 10;
-              _context.t0 = _context["catch"](0);
-              console.log(_context.t0);
-              _this.form.email = "";
-              _this.form.password = "";
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+                _this.form.email = "";
+                _this.form.password = "";
 
-            case 15:
-            case "end":
-              return _context.stop();
+              case 15:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, _callee, null, [[0, 10]]);
-    }))();
-  })
+        }, _callee, null, [[0, 10]]);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -38623,17 +38597,19 @@ var render = function () {
   return _c(
     "div",
     [
-      _vm._v("\r\nNavigation\r\n"),
+      _vm._v("\r\nNavigation component"),
       _c("br"),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "home" } } }, [_vm._v("Home")]),
-      _vm._v("|\r\n"),
+      _c("router-link", { attrs: { to: { name: "home" } } }, [
+        _vm._v("Home |"),
+      ]),
+      _vm._v(" "),
       !_vm.isLogged
         ? _c("router-link", { attrs: { to: { name: "login" } } }, [
-            _vm._v("Login"),
+            _vm._v("Login |"),
           ])
         : _vm._e(),
-      _vm._v("|\r\n"),
+      _vm._v(" "),
       _vm.isLogged
         ? _c(
             "a",
@@ -38646,10 +38622,10 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Wyloguj")]
+            [_vm._v("Logout |")]
           )
         : _vm._e(),
-      _vm._v("|\r\n"),
+      _vm._v(" "),
       _vm.isLogged
         ? _c("router-link", { attrs: { to: { name: "dashboard" } } }, [
             _vm._v("Dashboard"),
@@ -54278,8 +54254,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //window.Vue = require('vue');
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -54297,7 +54274,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //window.
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
